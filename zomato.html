@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zomato | Discover the best food & drinks</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #f8f8f8;
+        }
+        /* ================= HEADER ================= */
+        
+        header {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') center/cover no-repeat;
+            color: #fff;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 60px;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        
+        nav ul li {
+            cursor: pointer;
+            font-weight: 400;
+        }
+        
+        .hero {
+            height: calc(90vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 600;
+        }
+        
+        .hero p {
+            margin: 15px 0 30px;
+            font-size: 20px;
+        }
+        
+        .search-box {
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            padding: 15px;
+            width: 60%;
+            max-width: 700px;
+            gap: 10px;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 16px;
+        }
+        /* ================= CARDS ================= */
+        
+        .section {
+            padding: 60px;
+        }
+        
+        .section h2 {
+            margin-bottom: 30px;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 5px;
+        }
+        
+        .card-content p {
+            font-size: 14px;
+            color: #666;
+        }
+        /* ================= FOOTER ================= */
+        
+        footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 60px;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        /* ================= RESPONSIVE ================= */
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .search-box {
+                width: 90%;
+            }
+            .section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <nav>
+            <h2>Zomato</h2>
+            <ul>
+                <li>Add restaurant</li>
+                <li>Log in</li>
+                <li>Sign up</li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <h1>Zomato</h1>
+            <p>Discover the best food & drinks in your city</p>
+            <div class="search-box">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" placeholder="Chennai" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search for restaurant, cuisine or dish" />
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= ORDER SECTION ================= -->
+    <section class="section">
+        <h2>Popular Choices</h2>
+        <div class="cards" id="foodCards"></div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <h2>Zomato</h2>
+        <p>© 2026 Zomato Clone | Static Homepage Project</p>
+    </footer>
+
+    <script>
+        const foodData = [{
+            name: "Order Online",
+            desc: "Stay home and order to your doorstep",
+            img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+        }, {
+            name: "Dining",
+            desc: "View the city's favourite dining venues",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5"
+        }, {
+            name: "Nightlife",
+            desc: "Explore bars and nightlife",
+            img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1"
+        }];
+
+        const container = document.getElementById('foodCards');
+
+        foodData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+        <img src="${item.img}" />
+        <div class="card-content">
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+        </div>
+      `;
+            container.appendChild(card);
+        });
+    </script>
+
+</body>
+
+</html>
